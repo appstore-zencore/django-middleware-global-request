@@ -1,0 +1,21 @@
+language: python
+python:
+    - "3.6"
+env:
+    - DJANGO_VERSION=2.2
+    - DJANGO_VERSION=2.1
+    - DJANGO_VERSION=2.0
+services: postgresql
+before_install:
+    - sudo apt-get autoremove sqlite3
+    - sudo apt-get install python-software-properties
+    - sudo apt-get -y update
+    - sudo apt-cache show sqlite3
+    - sudo apt-get install sqlite3
+    - sudo sqlite3 -version
+install:
+    - pip install -r requirements.txt
+    - pip install psycopg2
+script:
+    - python manage.py test
+    - pip install .
